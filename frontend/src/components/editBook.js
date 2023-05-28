@@ -18,8 +18,24 @@ function EditBook({ bookList, setBookList }) {
 	async function handleSubmit(event) {
 		event.preventDefault(); //prevent default actions
 
+		var check = true;
+
 		if (bookPages > 0) {
-			const response = await fetch(`http://localhost:4000/edit`, {
+			check = false;
+		} else {
+			for (let i = 0; i < bookList.length; i++) {
+				if (
+					bookList[i].title === bookTitle &&
+					bookList[i].author === bookAuthor
+				) {
+					check = false;
+					break;
+				}
+			}
+		}
+
+		if (check === true) {
+			fetch(`http://localhost:4000/edit`, {
 				method: "POST",
 				body: JSON.stringify({
 					id: state.id,
@@ -39,7 +55,7 @@ function EditBook({ bookList, setBookList }) {
 				})
 				.catch(() => {
 					alert(
-						"Something went wrong. Please enter unique book details!"
+						"Something went wrong. Please enter valid and unique book details!"
 					);
 				});
 		} else {

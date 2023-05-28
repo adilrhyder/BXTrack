@@ -13,7 +13,7 @@ app.listen(4000); //backend listening on this port
 console.log("Server is listening...");
 
 //connecting to database
-var connectionString = `mongodb+srv://adilrhyder:${process.env.DB_PASS}@cluster0.vqiqs5z.mongodb.net/?retryWrites=true&w=majority`;
+var connectionString = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vqiqs5z.mongodb.net/?retryWrites=true&w=majority`;
 mongoose
 	.connect(connectionString)
 	.then((res, req) => {
